@@ -9,11 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* Live Time ------------------------------------------------ */
     const timeEl = document.getElementById('current-time');
+    const timeMobileEl = document.getElementById('current-time-mobile');
     const updateTime = () => {
-        if (!timeEl) return;
+        if (!timeEl && !timeMobileEl) return;
         const now = new Date();
         const opts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Africa/Casablanca' };
-        timeEl.textContent = now.toLocaleTimeString('en-GB', opts);
+        const formatted = now.toLocaleTimeString('en-GB', opts);
+        if (timeEl) timeEl.textContent = formatted;
+        if (timeMobileEl) timeMobileEl.textContent = formatted;
     };
     updateTime();
     setInterval(updateTime, 1000);
