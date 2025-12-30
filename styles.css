@@ -38,6 +38,9 @@
     /* Spacing */
     --container: 1400px;
     --gap: clamp(1rem, 3vw, 2rem);
+    --page-padding: clamp(1.25rem, 4vw, 2.75rem);
+    --section-padding: clamp(4.5rem, 8vw, 8rem);
+    --nav-padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2rem);
     
     /* Transitions */
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -233,7 +236,7 @@ body:has(.magnetic:hover) .cursor-outline {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 1.5rem 2rem;
+    padding: var(--nav-padding);
     mix-blend-mode: difference;
 }
 
@@ -356,7 +359,7 @@ body:has(.magnetic:hover) .cursor-outline {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4rem;
+    padding: clamp(2rem, 4vw, 4rem);
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s var(--ease) 0.3s, transform 0.5s var(--ease) 0.3s;
@@ -487,12 +490,19 @@ body:has(.magnetic:hover) .cursor-outline {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 8rem 2rem 2rem;
+    padding: clamp(6rem, 12vw, 10rem) var(--page-padding) clamp(2rem, 6vw, 4rem);
     max-width: var(--container);
     margin: 0 auto;
     width: 100%;
     position: relative;
     z-index: 1;
+}
+
+.hero-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(2rem, 6vw, 4rem);
 }
 
 hero-bottom {
@@ -575,7 +585,7 @@ hero-bottom {
    SECTIONS COMMON
    ===================================================== */
 section {
-    padding: 8rem 2rem;
+    padding: var(--section-padding) var(--page-padding);
     max-width: var(--container);
     margin: 0 auto;
 }
@@ -774,7 +784,7 @@ section {
 .about-wrapper {
     max-width: var(--container);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 var(--page-padding);
 }
 
 .about-content {
@@ -1033,16 +1043,16 @@ section {
    ===================================================== */
 .contact {
     background: var(--gray-900);
-    padding: 8rem 0;
+    padding: var(--section-padding) 0;
 }
 
 .contact-wrapper {
     max-width: var(--container);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 var(--page-padding);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: clamp(2rem, 4vw, 4rem);
 }
 
 .contact-heading {
@@ -1249,7 +1259,7 @@ section {
    ===================================================== */
 .footer {
     border-top: 1px solid var(--gray-800);
-    padding: 3rem 2rem;
+    padding: 3rem var(--page-padding);
     background: var(--black);
 }
 
@@ -1356,6 +1366,10 @@ section {
     body {
         cursor: auto;
     }
+
+    .hero-grid {
+        display: none;
+    }
     
     .nav-center {
         display: none;
@@ -1417,6 +1431,26 @@ section {
     }
 }
 
+@media (max-width: 640px) {
+    .project-item {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+    }
+
+    .project-meta {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .project-arrow {
+        justify-content: flex-start;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 9vw, 3.5rem);
+    }
+}
+
 @media (max-width: 480px) {
     section {
         padding: 4rem 1rem;
@@ -1437,5 +1471,17 @@ section {
     .visual-frame {
         width: 200px;
         height: 250px;
+    }
+}
+
+@media (pointer: coarse) {
+    .cursor-dot,
+    .cursor-outline,
+    .project-hover-image {
+        display: none;
+    }
+
+    body {
+        cursor: auto;
     }
 }
