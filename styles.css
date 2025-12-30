@@ -264,6 +264,15 @@ body:has(.magnetic:hover) .cursor-outline {
     transform: translateX(-50%);
 }
 
+.nav-time-mobile {
+    display: none;
+    gap: 0.5rem;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--gray-400);
+}
+
 .nav-time {
     font-family: var(--font-mono);
     font-size: 0.85rem;
@@ -1373,6 +1382,10 @@ section {
     
     .nav-center {
         display: none;
+    }
+
+    .nav-time-mobile {
+        display: flex;
     }
     
     .hero-top {
