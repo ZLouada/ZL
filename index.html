@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zakaria Louada - Creative Developer & Digital Architect">
+    <title>Z.LOUADA | Digital Architect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-scroll-container>
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-text">
+                <span data-text="Z">Z</span>
+                <span data-text=".">.</span>
+                <span data-text="L">L</span>
+                <span data-text="O">O</span>
+                <span data-text="U">U</span>
+                <span data-text="A">A</span>
+                <span data-text="D">D</span>
+                <span data-text="A">A</span>
+            </div>
+            <div class="loader-progress">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#home" class="nav-brand">
+                <span class="brand-text">Z<span class="brand-dot">.</span>L</span>
+            </a>
+            
+            <div class="nav-center">
+                <div class="nav-time">
+                    <span id="current-time">00:00:00</span>
+                    <span class="time-zone">GMT+1</span>
+                </div>
+            </div>
+            
+            <button class="nav-toggle" id="menu-toggle" aria-label="Menu">
+                <span class="toggle-text">MENU</span>
+                <div class="toggle-lines">
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Full Screen Menu -->
+    <div class="menu-overlay" id="menu-overlay">
+        <div class="menu-bg">
+            <div class="menu-col"></div>
+            <div class="menu-col"></div>
+            <div class="menu-col"></div>
+            <div class="menu-col"></div>
+            <div class="menu-col"></div>
+        </div>
+        <nav class="menu-nav">
+            <div class="menu-links">
+                <a href="#home" class="menu-link" data-index="01">
+                    <span class="link-text">Home</span>
+                    <span class="link-label">Back to start</span>
+                </a>
+                <a href="#work" class="menu-link" data-index="02">
+                    <span class="link-text">Work</span>
+                    <span class="link-label">Selected projects</span>
+                </a>
+                <a href="#about" class="menu-link" data-index="03">
+                    <span class="link-text">About</span>
+                    <span class="link-label">Get to know me</span>
+                </a>
+                <a href="#lab" class="menu-link" data-index="04">
+                    <span class="link-text">Lab</span>
+                    <span class="link-label">Experiments</span>
+                </a>
+                <a href="#contact" class="menu-link" data-index="05">
+                    <span class="link-text">Contact</span>
+                    <span class="link-label">Let's talk</span>
+                </a>
+            </div>
+            <div class="menu-footer">
+                <div class="menu-socials">
+                    <a href="https://github.com/ZLouada" target="_blank">Github</a>
+                    <a href="https://linkedin.com/in/zakaria-louada" target="_blank">LinkedIn</a>
+                    <a href="mailto:louadazakaria@gmail.com">Email</a>
+                </div>
+                <div class="menu-info">
+                    <p>Available for freelance</p>
+                    <p>Based in Morocco 🇲🇦</p>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-grid">
+            <div class="grid-line" style="--i: 0"></div>
+            <div class="grid-line" style="--i: 1"></div>
+            <div class="grid-line" style="--i: 2"></div>
+            <div class="grid-line" style="--i: 3"></div>
+            <div class="grid-line" style="--i: 4"></div>
+            <div class="grid-line horizontal" style="--i: 0"></div>
+            <div class="grid-line horizontal" style="--i: 1"></div>
+            <div class="grid-line horizontal" style="--i: 2"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-top">
+                <div class="hero-tag">
+                    <span class="tag-dot"></span>
+                    <span>Creative Developer</span>
+                </div>
+                <div class="hero-scroll-hint">
+                    <span>Scroll</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="hero-main">
+                <h1 class="hero-title">
+                    <span class="title-line">
+                        <span class="title-word" data-text="ZAKARIA">ZAKARIA</span>
+                    </span>
+                    <span class="title-line">
+                        <span class="title-word outline" data-text="LOUADA">LOUADA</span>
+                    </span>
+                </h1>
+                
+                <div class="hero-visual">
+                    <div class="visual-frame">
+                        <div class="frame-corner top-left"></div>
+                        <div class="frame-corner top-right"></div>
+                        <div class="frame-corner bottom-left"></div>
+                        <div class="frame-corner bottom-right"></div>
+                        <div class="visual-inner">
+                            <div class="morph-shape"></div>
+                            <div class="visual-text">
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-bottom">
+                <div class="hero-description">
+                    <p>I craft <em>digital experiences</em> that blend cutting-edge technology with bold, expressive design. Specializing in <em>AI-powered</em> web applications.</p>
+                </div>
+                <div class="hero-cta">
+                    <a href="#work" class="cta-button magnetic">
+                        <span class="cta-text">View Work</span>
+                        <span class="cta-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-marquee">
+            <div class="marquee-track">
+                <span>FULL STACK • AI/ML • REACT • NODE.JS • PYTHON • FIREBASE • CREATIVE CODE • </span>
+                <span>FULL STACK • AI/ML • REACT • NODE.JS • PYTHON • FIREBASE • CREATIVE CODE • </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work">
+        <div class="section-intro">
+            <div class="intro-label">
+                <span class="label-number">01</span>
+                <span class="label-text">Selected Work</span>
+            </div>
+            <h2 class="section-heading">
+                <span class="heading-line">Featured</span>
+                <span class="heading-line accent">Projects</span>
+            </h2>
+        </div>
+        
+        <div class="projects-list">
+            <article class="project-item" data-project="1">
+                <div class="project-number">01</div>
+                <div class="project-info">
+                    <h3 class="project-title">
+                        <a href="#">AI Workspace Hub</a>
+                    </h3>
+                    <p class="project-desc">Real-time collaborative platform with intelligent suggestions</p>
+                </div>
+                <div class="project-meta">
+                    <span class="meta-tag">React</span>
+                    <span class="meta-tag">GPT-4</span>
+                    <span class="meta-tag">WebSocket</span>
+                </div>
+                <div class="project-year">2025</div>
+                <div class="project-arrow">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="project-hover-image">
+                    <div class="hover-image-inner" style="background: linear-gradient(135deg, #06b6d4, #a855f7);">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="project-item" data-project="2">
+                <div class="project-number">02</div>
+                <div class="project-info">
+                    <h3 class="project-title">
+                        <a href="#">Neural Dashboard</a>
+                    </h3>
+                    <p class="project-desc">ML-driven analytics with predictive insights</p>
+                </div>
+                <div class="project-meta">
+                    <span class="meta-tag">Next.js</span>
+                    <span class="meta-tag">TensorFlow</span>
+                    <span class="meta-tag">Python</span>
+                </div>
+                <div class="project-year">2024</div>
+                <div class="project-arrow">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="project-hover-image">
+                    <div class="hover-image-inner" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="project-item" data-project="3">
+                <div class="project-number">03</div>
+                <div class="project-info">
+                    <h3 class="project-title">
+                        <a href="#">Smart API Gateway</a>
+                    </h3>
+                    <p class="project-desc">Intelligent routing with auto-scaling & anomaly detection</p>
+                </div>
+                <div class="project-meta">
+                    <span class="meta-tag">Node.js</span>
+                    <span class="meta-tag">Redis</span>
+                    <span class="meta-tag">Docker</span>
+                </div>
+                <div class="project-year">2024</div>
+                <div class="project-arrow">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="project-hover-image">
+                    <div class="hover-image-inner" style="background: linear-gradient(135deg, #22c55e, #06b6d4);">
+                        <i class="fas fa-server"></i>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="project-item" data-project="4">
+                <div class="project-number">04</div>
+                <div class="project-info">
+                    <h3 class="project-title">
+                        <a href="#">Generative Art Engine</a>
+                    </h3>
+                    <p class="project-desc">Creative coding platform for algorithmic visuals</p>
+                </div>
+                <div class="project-meta">
+                    <span class="meta-tag">Three.js</span>
+                    <span class="meta-tag">WebGL</span>
+                    <span class="meta-tag">GLSL</span>
+                </div>
+                <div class="project-year">2024</div>
+                <div class="project-arrow">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="project-hover-image">
+                    <div class="hover-image-inner" style="background: linear-gradient(135deg, #f97316, #eab308);">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <div class="work-cta">
+            <a href="#" class="outline-button magnetic">
+                <span>View All Projects</span>
+                <span class="btn-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-wrapper">
+            <div class="section-intro">
+                <div class="intro-label">
+                    <span class="label-number">02</span>
+                    <span class="label-text">About</span>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-headline">
+                    <h2>
+                        <span class="word">I</span>
+                        <span class="word">build</span>
+                        <span class="word highlight">digital</span>
+                        <span class="word highlight">products</span>
+                        <span class="word">that</span>
+                        <span class="word">push</span>
+                        <span class="word">boundaries.</span>
+                    </h2>
+                </div>
+                
+                <div class="about-details">
+                    <div class="about-text">
+                        <p class="text-large">Started with low-level C programming, mastering memory management and algorithms. Now I leverage AI to build scalable, intelligent applications.</p>
+                        <p>Every project gets infused with cutting-edge tech—from GPT integrations to custom ML models. I believe code should be art.</p>
+                    </div>
+                    
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number" data-count="50">0</span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="5">0</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="30">0</span>
+                            <span class="stat-label">Happy Clients</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skills-section">
+                <h3 class="skills-title">Tech Arsenal</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Frontend</h4>
+                        <ul>
+                            <li><span class="skill-icon"><i class="fab fa-react"></i></span>React / Next.js</li>
+                            <li><span class="skill-icon"><i class="fab fa-vuejs"></i></span>Vue.js</li>
+                            <li><span class="skill-icon"><i class="fas fa-cube"></i></span>Three.js / WebGL</li>
+                            <li><span class="skill-icon"><i class="fab fa-css3-alt"></i></span>GSAP / Animations</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Backend</h4>
+                        <ul>
+                            <li><span class="skill-icon"><i class="fab fa-node-js"></i></span>Node.js / Express</li>
+                            <li><span class="skill-icon"><i class="fab fa-python"></i></span>Python / FastAPI</li>
+                            <li><span class="skill-icon"><i class="fas fa-database"></i></span>PostgreSQL / MongoDB</li>
+                            <li><span class="skill-icon"><i class="fas fa-fire"></i></span>Firebase / Supabase</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>AI / ML</h4>
+                        <ul>
+                            <li><span class="skill-icon"><i class="fas fa-brain"></i></span>LangChain / GPT</li>
+                            <li><span class="skill-icon"><i class="fas fa-robot"></i></span>TensorFlow / PyTorch</li>
+                            <li><span class="skill-icon"><i class="fas fa-comments"></i></span>NLP / Embeddings</li>
+                            <li><span class="skill-icon"><i class="fas fa-image"></i></span>Computer Vision</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Tools</h4>
+                        <ul>
+                            <li><span class="skill-icon"><i class="fab fa-docker"></i></span>Docker / K8s</li>
+                            <li><span class="skill-icon"><i class="fab fa-aws"></i></span>AWS / Vercel</li>
+                            <li><span class="skill-icon"><i class="fab fa-git-alt"></i></span>Git / CI/CD</li>
+                            <li><span class="skill-icon"><i class="fab fa-figma"></i></span>Figma / Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lab Section -->
+    <section id="lab" class="lab">
+        <div class="section-intro">
+            <div class="intro-label">
+                <span class="label-number">03</span>
+                <span class="label-text">Experiments</span>
+            </div>
+            <h2 class="section-heading">
+                <span class="heading-line">The</span>
+                <span class="heading-line accent">Lab</span>
+            </h2>
+        </div>
+        
+        <div class="lab-grid">
+            <div class="lab-card featured">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3>Neural Canvas</h3>
+                    <p>AI-generated visuals responding to interactions in real-time</p>
+                    <div class="card-tags">
+                        <span>Generative</span>
+                        <span>WebGL</span>
+                        <span>Live</span>
+                    </div>
+                    <div class="card-status">
+                        <span class="status-pulse"></span>
+                        <span>Running on this page</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lab-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>GPT Interfaces</h3>
+                    <p>Conversational UIs that understand context and intent</p>
+                    <div class="card-tags">
+                        <span>GPT-4</span>
+                        <span>NLP</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lab-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-network"></i>
+                    </div>
+                    <h3>Predictive Models</h3>
+                    <p>ML that forecasts trends and optimizes experiences</p>
+                    <div class="card-tags">
+                        <span>TensorFlow</span>
+                        <span>Analytics</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lab-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Auto DevOps</h3>
+                    <p>Self-healing CI/CD pipelines powered by AI</p>
+                    <div class="card-tags">
+                        <span>GitHub</span>
+                        <span>AI Ops</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-wrapper">
+            <div class="contact-content">
+                <div class="section-intro">
+                    <div class="intro-label">
+                        <span class="label-number">04</span>
+                        <span class="label-text">Contact</span>
+                    </div>
+                </div>
+                
+                <div class="contact-main">
+                    <h2 class="contact-heading">
+                        <span class="line">Let's work</span>
+                        <span class="line accent">together</span>
+                    </h2>
+                    
+                    <div class="contact-info">
+                        <p class="contact-text">Have a project in mind? Let's create something extraordinary together.</p>
+                        
+                        <div class="contact-links">
+                            <a href="mailto:louadazakaria@gmail.com" class="contact-link magnetic">
+                                <span class="link-label">Email</span>
+                                <span class="link-value">louadazakaria@gmail.com</span>
+                                <span class="link-arrow">→</span>
+                            </a>
+                            <a href="https://github.com/ZLouada" target="_blank" class="contact-link magnetic">
+                                <span class="link-label">Github</span>
+                                <span class="link-value">github.com/ZLouada</span>
+                                <span class="link-arrow">→</span>
+                            </a>
+                            <a href="https://linkedin.com/in/zakaria-louada" target="_blank" class="contact-link magnetic">
+                                <span class="link-label">LinkedIn</span>
+                                <span class="link-value">linkedin.com/in/zakaria-louada</span>
+                                <span class="link-arrow">→</span>
+                            </a>
+                        </div>
+                        
+                        <div class="availability-badge">
+                            <span class="badge-dot"></span>
+                            <span>Available for new projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="contact-form" id="contact-form">
+                <div class="form-header">
+                    <span>Send a message</span>
+                </div>
+                <div class="form-fields">
+                    <div class="field">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name">Name</label>
+                        <div class="field-line"></div>
+                    </div>
+                    <div class="field">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Email</label>
+                        <div class="field-line"></div>
+                    </div>
+                    <div class="field">
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <label for="message">Message</label>
+                        <div class="field-line"></div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-button magnetic">
+                    <span class="btn-text">Send Message</span>
+                    <span class="btn-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-brand">Z.LOUADA</span>
+                <p>© 2025 — All rights reserved</p>
+            </div>
+            <div class="footer-center">
+                <span>Based in Morocco</span>
+            </div>
+            <div class="footer-right">
+                <a href="#home" class="back-to-top magnetic">
+                    <span>Back to top</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 20V4m0 0l-6 6m6-6l6 6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
