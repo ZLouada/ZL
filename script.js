@@ -1,55 +1,80 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const body = document.body;
 
-    /* Loader -------------------------------------------------- */
+    /* ========== LOADER ========== */
     const loader = document.getElementById('loader');
-    window.addEventListener('load', () => {
-        setTimeout(() => loader?.classList.add('hidden'), 1200);
+    const loaderBar = document.getElementById('loader-bar');
+    const loaderPercent = document.getElementById('loader-percent');
+    let progress = 0;
+
+    const loaderInterval = setInterval(() => {
+        progress += Math.random() * 15 + 5;
+        if (progress > 100) progress = 100;
+        loaderBar.style.width = progress + '%';
+        loaderPercent.textContent = Math.floor(progress) + '%';
+        if (progress >= 100) {
+            clearInterval(loaderInterval);
+            setTimeout(() => loader.classList.add('done'), 400);
+        }
+    }, 120);
+
+    /* ========== CUSTOM CURSOR ========== */
+    const cursor = document.getElementById('cursor');
+    const cursorTrail = document.getElementById('cursor-trail');
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (cursor) {
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        }
     });
 
-    /* Live Time ------------------------------------------------ */
-    const timeEl = document.getElementById('current-time');
-    const timeMobileEl = document.getElementById('current-time-mobile');
-    const updateTime = () => {
-        if (!timeEl && !timeMobileEl) return;
-        const now = new Date();
-        const opts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Africa/Casablanca' };
-        const formatted = now.toLocaleTimeString('en-GB', opts);
-        if (timeEl) timeEl.textContent = formatted;
-        if (timeMobileEl) timeMobileEl.textContent = formatted;
-    };
-    updateTime();
-    setInterval(updateTime, 1000);
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.12;
+        trailY += (mouseY - trailY) * 0.12;
+        if (cursorTrail) {
+            cursorTrail.style.left = trailX + 'px';
+            cursorTrail.style.top = trailY + 'px';
+        }
+        requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
 
-    /* Menu Overlay --------------------------------------------- */
-    const menuToggle = document.getElementById('menu-toggle');
-    const menuOverlay = document.getElementById('menu-overlay');
-
-    const setMenuState = (open) => {
-        menuOverlay?.classList.toggle('active', open);
-        menuToggle?.classList.toggle('active', open);
-        body.classList.toggle('menu-open', open);
-    };
-
-    menuToggle?.addEventListener('click', () => {
-        const isOpen = menuOverlay?.classList.contains('active');
-        setMenuState(!isOpen);
+    const hoverTargets = document.querySelectorAll('a, button, .skill-card, .project-card, .contact-card, .stat-card');
+    hoverTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
 
-    document.querySelectorAll('.menu-link').forEach((link) => {
-        link.addEventListener('click', (e) => {
-            const targetId = link.getAttribute('href');
-            if (targetId && targetId.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(targetId);
-                target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            setMenuState(false);
+    /* ========== HEADER SCROLL ========== */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ========== MOBILE MENU ========== */
+    const navToggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
         });
     });
 
-    /* Smooth Scroll ------------------------------------------- */
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    /* ========== SMOOTH SCROLL ========== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             const href = anchor.getAttribute('href');
             if (!href || href === '#') return;
@@ -61,285 +86,205 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* Custom Cursor ------------------------------------------- */
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
-    let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
-    let outlineX = targetX;
-    let outlineY = targetY;
+    /* ========== ACTIVE NAV LINK ========== */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    const renderCursor = () => {
-        outlineX += (targetX - outlineX) * 0.15;
-        outlineY += (targetY - outlineY) * 0.15;
-        if (cursorOutline) {
-            cursorOutline.style.left = `${outlineX}px`;
-            cursorOutline.style.top = `${outlineY}px`;
-        }
-        if (cursorDot) {
-            cursorDot.style.left = `${targetX}px`;
-            cursorDot.style.top = `${targetY}px`;
-        }
-        requestAnimationFrame(renderCursor);
-    };
-
-    document.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-    });
-
-    renderCursor();
-
-    /* Magnetic Hover ------------------------------------------ */
-    const magnetics = document.querySelectorAll('.magnetic');
-    magnetics.forEach((el) => {
-        const strength = 0.25;
-        el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const deltaX = e.clientX - (rect.left + rect.width / 2);
-            const deltaY = e.clientY - (rect.top + rect.height / 2);
-            el.style.transform = `translate(${deltaX * strength}px, ${deltaY * strength}px)`;
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const top = section.offsetTop - 200;
+            if (scrollY >= top) current = section.getAttribute('id');
         });
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = 'translate(0, 0)';
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-section') === current) {
+                link.classList.add('active');
+            }
         });
     });
 
-    /* Project Hover Images ------------------------------------- */
-    const projectItems = document.querySelectorAll('.project-item');
-    projectItems.forEach((item) => {
-        const hoverImage = item.querySelector('.project-hover-image');
-        if (!hoverImage) return;
+    /* ========== INTERSECTION OBSERVER REVEAL ========== */
+    const revealElements = document.querySelectorAll(
+        '.section-label, .section-title, .about-desc, .about-stats, .about-image-frame, ' +
+        '.skill-card, .project-card, .contact-card, .contact-form, .projects-subtitle, .contact-desc'
+    );
 
-        item.addEventListener('mouseenter', () => {
-            hoverImage.style.opacity = '1';
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
         });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-        item.addEventListener('mouseleave', () => {
-            hoverImage.style.opacity = '0';
-        });
-
-        item.addEventListener('mousemove', (e) => {
-            hoverImage.style.transform = `translate(${e.clientX + 20}px, ${e.clientY - 20}px)`;
-        });
+    revealElements.forEach(el => {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
     });
 
-    /* Stat Counters -------------------------------------------- */
-    const counters = document.querySelectorAll('.stat-number');
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const el = entry.target;
-            const target = Number(el.getAttribute('data-count')) || 0;
-            const duration = 1200;
-            const start = performance.now();
-
-            const step = (now) => {
-                const progress = Math.min((now - start) / duration, 1);
-                el.textContent = Math.floor(progress * target).toString();
-                if (progress < 1) requestAnimationFrame(step);
-            };
-
-            requestAnimationFrame(step);
-            observer.unobserve(el);
+    /* ========== SKILL BARS ========== */
+    const skillBars = document.querySelectorAll('.skill-bar-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => { bar.style.width = width; }, 200);
+                skillObserver.unobserve(bar);
+            }
         });
     }, { threshold: 0.5 });
 
-    counters.forEach((c) => counterObserver.observe(c));
+    skillBars.forEach(bar => skillObserver.observe(bar));
 
-    /* Contact Form --------------------------------------------- */
-    const contactForm = document.getElementById('contact-form');
-    contactForm?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const btn = contactForm.querySelector('.submit-button');
-        const btnText = btn?.querySelector('.btn-text');
+    /* ========== STAT COUNTERS ========== */
+    const statNums = document.querySelectorAll('.stat-num');
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-target')) || 0;
+            const duration = 1000;
+            const start = performance.now();
 
-        if (btn) {
-            btn.disabled = true;
-            if (btnText) btnText.textContent = 'Sending...';
+            function step(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target);
+                if (progress < 1) requestAnimationFrame(step);
+            }
+
+            requestAnimationFrame(step);
+            statObserver.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+
+    statNums.forEach(el => statObserver.observe(el));
+
+    /* ========== FETCH GITHUB PROJECTS ========== */
+    const projectsGrid = document.getElementById('projects-grid');
+    const GITHUB_USERNAME = 'ZLouada';
+
+    const langColors = {
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'JavaScript': '#f1e05a',
+        'TypeScript': '#3178c6',
+        'Python': '#3572A5',
+        'C': '#555555',
+        'C++': '#f34b7d',
+        'Shell': '#89e051'
+    };
+
+    const langIcons = {
+        'HTML': 'fab fa-html5',
+        'CSS': 'fab fa-css3-alt',
+        'JavaScript': 'fab fa-js-square',
+        'TypeScript': 'fas fa-code',
+        'Python': 'fab fa-python',
+        'C': 'fas fa-terminal',
+        'C++': 'fas fa-microchip',
+        'Shell': 'fas fa-terminal'
+    };
+
+    async function fetchGitHubProjects() {
+        try {
+            const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=30`);
+            if (!res.ok) throw new Error('Failed to fetch');
+            const repos = await res.json();
+
+            const filtered = repos
+                .filter(r => !r.fork && r.name !== GITHUB_USERNAME && r.name !== `${GITHUB_USERNAME}.github.io`)
+                .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                .slice(0, 6);
+
+            if (filtered.length === 0) {
+                projectsGrid.innerHTML = '<p style="text-align:center;color:var(--text-muted);grid-column:1/-1;">No projects found.</p>';
+                return;
+            }
+
+            projectsGrid.innerHTML = filtered.map(repo => {
+                const lang = repo.language || 'Code';
+                const icon = langIcons[lang] || 'fas fa-code';
+                const color = langColors[lang] || '#888';
+                const desc = repo.description || 'No description available';
+                const homepage = repo.homepage ? `<a href="${repo.homepage}" target="_blank" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>` : '';
+
+                return `
+                    <div class="project-card reveal">
+                        <div class="project-card-header">
+                            <div class="project-card-icon">
+                                <i class="${icon}"></i>
+                            </div>
+                            <div class="project-card-links">
+                                <a href="${repo.html_url}" target="_blank" title="Source Code"><i class="fab fa-github"></i></a>
+                                ${homepage}
+                            </div>
+                        </div>
+                        <div class="project-card-body">
+                            <h3><a href="${repo.html_url}" target="_blank">${repo.name.replace(/[-_]/g, ' ')}</a></h3>
+                            <p>${desc}</p>
+                        </div>
+                        <div class="project-card-footer">
+                            <div class="project-tags">
+                                <span class="project-tag" style="border-color: ${color}30; background: ${color}10; color: ${color}">${lang}</span>
+                            </div>
+                            ${repo.stargazers_count > 0 ? `<div class="project-stars"><i class="fas fa-star"></i> ${repo.stargazers_count}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Re-observe newly added project cards
+            document.querySelectorAll('.project-card.reveal').forEach(card => {
+                revealObserver.observe(card);
+            });
+
+            // Re-add cursor hover for new cards
+            document.querySelectorAll('.project-card').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+            });
+
+        } catch (err) {
+            projectsGrid.innerHTML = `
+                <div style="grid-column:1/-1;text-align:center;padding:3rem 0;">
+                    <p style="color:var(--text-muted);margin-bottom:1rem;">Could not load projects from GitHub.</p>
+                    <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" class="btn btn-outline" style="display:inline-flex;">
+                        <i class="fab fa-github"></i>
+                        <span>Visit GitHub Profile</span>
+                    </a>
+                </div>
+            `;
         }
+    }
+
+    fetchGitHubProjects();
+
+    /* ========== CONTACT FORM ========== */
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        const btnSpan = btn.querySelector('span');
+        const originalText = btnSpan.textContent;
+
+        btn.disabled = true;
+        btnSpan.textContent = 'Sending...';
 
         setTimeout(() => {
             contactForm.reset();
-            if (btn) btn.disabled = false;
-            if (btnText) btnText.textContent = 'Send Message';
-            alert('Message sent! I will get back to you soon.');
+            btn.disabled = false;
+            btnSpan.textContent = 'Sent!';
+            btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+
+            setTimeout(() => {
+                btnSpan.textContent = originalText;
+                btn.style.background = '';
+            }, 2500);
         }, 1200);
     });
+
 });
-// Mobile Navigation Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-}
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    if (hamburger) hamburger.classList.remove('active');
-    if (navMenu) navMenu.classList.remove('active');
-}));
-
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Navbar Blur Effect on Scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-        navbar.style.boxShadow = '0 10px 30px -10px rgba(0, 0, 0, 0.3)';
-    } else {
-        navbar.style.background = 'rgba(15, 23, 42, 0.85)';
-        navbar.style.boxShadow = 'none';
-    }
-});
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-
-            // Animate progress bars
-            const progressBar = entry.target.querySelector('.progress-bar');
-            if (progressBar) {
-                const width = progressBar.getAttribute('data-width');
-                requestAnimationFrame(() => {
-                    progressBar.style.width = width;
-                });
-            }
-
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-const revealTargets = document.querySelectorAll('section, .skill-card, .project-card, .about-card');
-revealTargets.forEach(el => {
-    el.classList.add('reveal');
-    observer.observe(el);
-});
-
-// Form Handling
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const submitBtn = this.querySelector('.btn-primary');
-        const originalText = submitBtn.textContent;
-        
-        submitBtn.textContent = 'Sending...';
-        submitBtn.style.opacity = '0.7';
-        submitBtn.disabled = true;
-        
-        setTimeout(() => {
-            alert('Message sent successfully!');
-            this.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.style.opacity = '1';
-            submitBtn.disabled = false;
-        }, 1500);
-    });
-}
-
-// Typing Animation
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = ''; 
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title .highlight');
-    if (heroTitle) {
-        const text = heroTitle.textContent;
-        typeWriter(heroTitle, text, 80);
-    }
-});
-
-// Ripple Effect
-document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        let ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        this.appendChild(ripple);
-        
-        let rect = this.getBoundingClientRect();
-        let x = e.clientX - rect.left;
-        let y = e.clientY - rect.top;
-        
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-});
-
-// Active Link Highlighting
-window.addEventListener('scroll', () => {
-    let current = '';
-    const sections = document.querySelectorAll('section');
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 300)) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Inject Ripple Styles
-const style = document.createElement('style');
-style.textContent = `
-    .btn { position: relative; overflow: hidden; }
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.4);
-        transform: scale(0);
-        animation: ripple 0.6s linear;
-        pointer-events: none;
-    }
-    @keyframes ripple {
-        to { transform: scale(4); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
