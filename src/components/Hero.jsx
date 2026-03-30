@@ -125,7 +125,7 @@ const Hero = () => {
               <FaGithub size={24} />
             </motion.a>
             <motion.a
-              href="https://linkedin.com/in/ZLouada"
+              href="https://linkedin.com/in/zakaria-louada"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-full bg-dark-600/50 text-gray-400 hover:text-electric hover:bg-dark-500 transition-all duration-300"

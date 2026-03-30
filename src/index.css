@@ -36,11 +36,11 @@
   }
   
   .electric-glow {
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-electric via-blue-400 to-electric bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-purple-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent;
   }
   
   .section-padding {
@@ -48,14 +48,14 @@
   }
   
   .btn-primary {
-    @apply px-6 py-3 bg-electric text-dark-900 font-semibold rounded-lg 
+    @apply px-6 py-3 bg-electric text-white font-semibold rounded-lg 
            hover:bg-electric-light transition-all duration-300 
            hover:shadow-lg hover:shadow-electric/25 active:scale-95;
   }
   
   .btn-outline {
     @apply px-6 py-3 border-2 border-electric text-electric font-semibold rounded-lg 
-           hover:bg-electric hover:text-dark-900 transition-all duration-300 active:scale-95;
+           hover:bg-electric hover:text-white transition-all duration-300 active:scale-95;
   }
   
   .input-field {
@@ -94,6 +94,6 @@
 .bg-grid {
   background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
 }

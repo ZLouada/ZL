@@ -34,8 +34,8 @@ const Contact = () => {
     {
       icon: <HiMail size={24} />,
       label: 'Email',
-      value: 'contact@zlouada.dev',
-      href: 'mailto:contact@zlouada.dev',
+      value: 'louadazakaria@gmail.com',
+      href: 'mailto:louadazakaria@gmail.com',
     },
     {
       icon: <FaGithub size={24} />,
@@ -46,8 +46,8 @@ const Contact = () => {
     {
       icon: <FaLinkedin size={24} />,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/ZLouada',
-      href: 'https://linkedin.com/in/ZLouada',
+      value: 'linkedin.com/in/zakaria-louada',
+      href: 'https://linkedin.com/in/zakaria-louada',
     },
     {
       icon: <FaMapMarkerAlt size={24} />,
@@ -149,7 +149,7 @@ const Contact = () => {
                     <FaGithub size={24} />
                   </motion.a>
                   <motion.a
-                    href="https://linkedin.com/in/ZLouada"
+                    href="https://linkedin.com/in/zakaria-louada"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-xl bg-dark-600 text-gray-400 hover:text-electric hover:bg-dark-500 transition-all duration-300"

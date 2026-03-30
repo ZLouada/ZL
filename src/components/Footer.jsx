@@ -44,7 +44,7 @@ const Footer = () => {
               <FaGithub size={20} />
             </motion.a>
             <motion.a
-              href="https://linkedin.com/in/ZLouada"
+              href="https://linkedin.com/in/zakaria-louada"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg text-gray-500 hover:text-electric transition-colors duration-300"
