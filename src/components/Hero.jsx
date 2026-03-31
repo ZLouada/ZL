@@ -6,18 +6,18 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-grid"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-grid pt-16 sm:pt-20"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Gradient orbs */}
+        {/* Gradient orbs - smaller on mobile */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
           }}
           transition={{ duration: 8, repeat: Infinity }}
-          className="absolute -top-40 -right-40 w-96 h-96 bg-electric/20 rounded-full blur-3xl"
+          className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-64 h-64 sm:w-96 sm:h-96 bg-electric/20 rounded-full blur-3xl"
         />
         <motion.div
           animate={{
@@ -25,27 +25,27 @@ const Hero = () => {
             opacity: [0.2, 0.4, 0.2],
           }}
           transition={{ duration: 10, repeat: Infinity }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"
+          className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-64 h-64 sm:w-96 sm:h-96 bg-purple-600/20 rounded-full blur-3xl"
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 sm:py-12">
         {/* Glassmorphism card */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="glass-card p-8 sm:p-12 lg:p-16 electric-glow"
+          className="glass-card p-6 sm:p-8 lg:p-16 electric-glow"
         >
           {/* Status badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric/10 border border-electric/30 mb-6"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-electric/10 border border-electric/30 mb-4 sm:mb-6"
           >
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-sm text-electric">Available for opportunities</span>
+            <span className="text-xs sm:text-sm text-electric">Available for opportunities</span>
           </motion.div>
 
           {/* Name */}
@@ -53,7 +53,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-3 sm:mb-4"
           >
             Hi, I'm{' '}
             <span className="text-gradient">ZLouada</span>
@@ -64,9 +64,13 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-xl sm:text-2xl lg:text-3xl text-gray-400 mb-6"
+            className="text-base sm:text-xl md:text-2xl lg:text-3xl text-gray-400 mb-4 sm:mb-6 leading-relaxed"
           >
-            Software Engineer | International Economics Student | Full-Stack Developer
+            <span className="block sm:inline">Software Engineer</span>
+            <span className="hidden sm:inline"> | </span>
+            <span className="block sm:inline">Economics Student</span>
+            <span className="hidden sm:inline"> | </span>
+            <span className="block sm:inline">Full-Stack Developer</span>
           </motion.p>
 
           {/* Bio */}
@@ -74,11 +78,11 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-gray-500 max-w-2xl mx-auto mb-8 text-base sm:text-lg"
+            className="text-gray-500 max-w-2xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base lg:text-lg leading-relaxed px-2"
           >
             A 20-year-old developer who balances the logic of International Economics 
-            with the precision of Software Engineering. I specialize in building robust 
-            applications, from C-based systems to modern React web apps.
+            with the precision of Software Engineering. Building robust applications, 
+            from C-based systems to modern React web apps.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -86,11 +90,11 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8"
           >
             <motion.a
               href="#projects"
-              className="btn-primary flex items-center gap-2"
+              className="btn-primary flex items-center justify-center gap-2 w-full sm:w-auto min-h-[48px] text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -98,7 +102,7 @@ const Hero = () => {
             </motion.a>
             <motion.a
               href="#contact"
-              className="btn-outline flex items-center gap-2"
+              className="btn-outline flex items-center justify-center gap-2 w-full sm:w-auto min-h-[48px] text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -112,13 +116,13 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="flex justify-center gap-6"
+            className="flex justify-center gap-4"
           >
             <motion.a
               href="https://github.com/ZLouada"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-dark-600/50 text-gray-400 hover:text-electric hover:bg-dark-500 transition-all duration-300"
+              className="p-3 sm:p-4 rounded-full bg-dark-600/50 text-gray-400 hover:text-electric hover:bg-dark-500 transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center"
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -128,7 +132,7 @@ const Hero = () => {
               href="https://linkedin.com/in/zakaria-louada"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-dark-600/50 text-gray-400 hover:text-electric hover:bg-dark-500 transition-all duration-300"
+              className="p-3 sm:p-4 rounded-full bg-dark-600/50 text-gray-400 hover:text-electric hover:bg-dark-500 transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center"
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -137,18 +141,18 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator - hidden on very small screens */}
         <motion.a
           href="#about"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="text-gray-500 hover:text-electric transition-colors cursor-pointer"
+            className="text-gray-500 hover:text-electric transition-colors cursor-pointer p-2"
           >
             <HiChevronDown size={32} />
           </motion.div>
