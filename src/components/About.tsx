@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { SectionAmbientOrbs } from "@/components/AmbientOrbs";
 
 const pillars = [
   {
@@ -35,14 +37,46 @@ const pillars = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
 const About = () => {
   return (
-    <section id="profile" className="py-32 bg-black text-zinc-100 relative">
+    <section id="profile" className="py-32 bg-black text-zinc-100 relative overflow-hidden">
+      {/* Floating Ambient Orbs for Atmospheric Depth */}
+      <SectionAmbientOrbs position="left" primaryColor="emerald" />
+
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-950 border border-zinc-850 text-zinc-400 text-[11px] font-mono tracking-widest uppercase mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mb-20"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-950/80 backdrop-blur border border-zinc-800 text-zinc-400 text-[11px] font-mono tracking-widest uppercase mb-4 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Executive Profile & Methodology
           </div>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-architectural tracking-tight text-zinc-100 mb-6">
@@ -54,15 +88,31 @@ const About = () => {
             and fragile distributed systems. I bridge the structural chasm between
             hard-nosed systems engineering and mathematical economic theory.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 4 Strategic Pillars Grid - Clean Typographic Layout without Icons */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+        {/* 4 Strategic Pillars Grid - Clean Typographic Layout with Fluid Animation */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24"
+        >
           {pillars.map((pillar) => (
-            <div
+            <motion.div
               key={pillar.number}
-              className="p-8 rounded bg-zinc-950/80 hover:bg-zinc-900/60 border border-zinc-900 hover:border-zinc-800 transition-all duration-200 flex flex-col justify-between"
+              variants={itemVariants}
+              whileHover={{
+                y: -5,
+                borderColor: "rgba(16, 185, 129, 0.35)",
+                backgroundColor: "rgba(18, 18, 20, 0.95)",
+              }}
+              transition={{ duration: 0.25 }}
+              className="group relative p-8 rounded bg-zinc-950/80 backdrop-blur-md border border-zinc-900 shadow-xl overflow-hidden flex flex-col justify-between"
             >
+              {/* Top rim glow on card hover */}
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent group-hover:via-emerald-500/60 transition-all duration-300" />
+
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <span className="text-xs font-mono text-emerald-400 font-semibold tracking-wider">
@@ -73,7 +123,7 @@ const About = () => {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-semibold text-zinc-100 mb-2">
+                <h3 className="text-xl font-semibold text-zinc-100 mb-2 group-hover:text-white transition-colors">
                   {pillar.title}
                 </h3>
 
@@ -88,27 +138,36 @@ const About = () => {
 
               <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-900">
                 {pillar.tags.map((tag) => (
-                  <span
+                  <motion.span
                     key={tag}
-                    className="text-[10px] font-mono px-2.5 py-1 rounded bg-black border border-zinc-850 text-zinc-400"
+                    whileHover={{ scale: 1.05, borderColor: "rgba(16, 185, 129, 0.5)" }}
+                    className="text-[10px] font-mono px-2.5 py-1 rounded bg-black/80 border border-zinc-800 text-zinc-400 hover:text-zinc-200 transition-colors"
                   >
                     {tag}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Core Advisory Thesis Callout Box - No Price Tags */}
-        <div
+        {/* Core Advisory Thesis Callout Box with Ambient Aura */}
+        <motion.div
           id="thesis"
-          className="relative rounded bg-zinc-950 border border-zinc-850 p-8 sm:p-12 overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded bg-zinc-950/90 backdrop-blur-xl border border-zinc-850 p-8 sm:p-12 overflow-hidden shadow-2xl"
         >
+          {/* Subtle Ambient Aura within the thesis box */}
+          <div className="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-emerald-500/12 blur-[100px] pointer-events-none" />
+          <div className="absolute -left-24 -bottom-24 w-80 h-80 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none" />
+
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-3xl">
               <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="text-[11px] font-mono tracking-widest text-emerald-400 uppercase bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full">
+                <span className="text-[11px] font-mono tracking-widest text-emerald-400 uppercase bg-zinc-900/90 border border-zinc-800 px-3 py-1 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                   Core Advisory Thesis
                 </span>
                 <span className="text-[11px] font-mono text-zinc-400 tracking-wider">
@@ -130,13 +189,15 @@ const About = () => {
 
             <div className="w-full lg:w-auto flex-shrink-0">
               <a href="#contact" className="block w-full">
-                <Button className="w-full lg:w-auto bg-zinc-100 hover:bg-white text-zinc-950 font-mono text-xs uppercase tracking-wider font-semibold px-6 py-6 rounded transition-all duration-200">
-                  Initiate Advisory Mandate
-                </Button>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button className="w-full lg:w-auto bg-zinc-100 hover:bg-white text-zinc-950 font-mono text-xs uppercase tracking-wider font-semibold px-6 py-6 rounded shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] transition-all duration-200">
+                    Initiate Advisory Mandate
+                  </Button>
+                </motion.div>
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
